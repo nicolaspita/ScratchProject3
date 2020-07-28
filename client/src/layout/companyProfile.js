@@ -180,7 +180,7 @@ const CompanyProfile = (props) => {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <HealthData/>
+                <HealthData name={props.location.name}/>
               </Paper>
             </Grid>
           </Grid>

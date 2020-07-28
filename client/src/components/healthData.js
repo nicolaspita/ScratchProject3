@@ -1,30 +1,38 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Line } from 'react-chartjs-2';
+import axios from 'axios'
 
 class HealthData extends Component {
-  constructor() {
-    super();
-    this.state = {
+  // used to let react know components won't unmount
+  // _isMounted = false;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: this.props.name,
     }
   }
 
     // to use for the quarterly/annual data request
-  // componentDidMount() {
-  //   axios.get('/api/overview/?symbol=AAPL')
-  //     .then(res => {
-  //       console.log('res.data', res.data);
-  //       this.setState({
-  //         'EPS': Math.round(res.data.EPS * 100)/100,
-  //         'P/E': Math.round(res.data.PERatio * 100)/100,
-  //         'Beta': Math.round(res.data.Beta * 100)/100,
-  //         'P/B': Math.round(res.data.PriceToBookRatio * 100)/100,
-  //         'PEG': Math.round(res.data.PEGRatio * 100)/100,
-  //         // 'Free Cash Flow': null,
-  //       })
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+ componentDidMount() {
+    this._isMounted = true;
+    const zika = [];
+    const ebola = [];
+    const dataArr = [];
+    const editLabelsArr = []
+    axios.get('/company/chart-data?interval=monthly&symbol=' + this.state.name)
+      .then(response => {
+        console.log(response.data);
+        // mold the data to make it easier to setState
+        
+      })
+      .catch(err=>console.log(err));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     // fallback chart to look at in case its too difficult to compare statistics
